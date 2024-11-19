@@ -179,8 +179,18 @@ def DFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    s = Stack[(state)]
+    b = s.pop()
+    b.print_pretty()
+    print(b)
+    mcc = b.find_most_constrained_cell()
+    print (mcc) 
 
+    b.update(mcc[0],mcc[1],b.rows[mcc[0]][mcc[1]][0])
+    s.push(b)
+
+    print (s)
+    
 
 def BFS(state: Board) -> Board:
     """Performs a breadth first search. Takes a Board and attempts to assign values to
