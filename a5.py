@@ -188,12 +188,11 @@ def DFS(state: Board) -> Board:
         if b.goal_test():
             return b
         mcc = b.find_most_constrained_cell()
-        #print(mcc)
+
         
         row = mcc[0]
         col = mcc[1]
-        #print(b.rows[row][col])
-        #print()
+       
         for sel in b.rows[row][col]:
             cpy = copy.deepcopy(b)
             cpy.update(row, col, sel)
@@ -212,7 +211,27 @@ def BFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    q = Queue([state])
+    num = 0
+
+    while not q.is_empty():
+        
+        b: Board = q.pop()
+        num += 1
+        
+        if b.goal_test():
+            print(f"Number of Iterations: {num}")
+            return b
+        mcc = b.find_most_constrained_cell()
+        
+        
+        row = mcc[0]
+        col = mcc[1]
+        
+        for sel in b.rows[row][col]:
+            cpy = copy.deepcopy(b)
+            cpy.update(row, col, sel)
+            q.push(cpy)
 
 
 if __name__ == "__main__":
@@ -221,13 +240,13 @@ if __name__ == "__main__":
     # # CODE BELOW HERE RUNS YOUR BFS/DFS
     # print("<<<<<<<<<<<<<< Solving Sudoku >>>>>>>>>>>>>>")
 
-    # def test_dfs_or_bfs(use_dfs: bool, moves: List[Tuple[int, int, int]]) -> None:
-    #     b = Board()
-    #     # make initial moves to set up board
-    #     for move in moves:
-    #         b.update(*move)
+    #  def test_dfs_or_bfs(use_dfs: bool, moves: List[Tuple[int, int, int]]) -> None:
+    #      b = Board()
+    
+    #  for move in moves:
+    #     b.update(*move)
 
-    #     # print initial board
+       
     #     print("<<<<< Initial Board >>>>>")
     #     b.print_pretty()
     #     # solve board
